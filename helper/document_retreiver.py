@@ -1,17 +1,19 @@
 from gensim.models import TfidfModel
 from gensim.corpora import Dictionary
 import numpy as np
-import regex
 import spacy
 from elasticsearch import Elasticsearch
 import json
 from textblob import TextBlob
-from pprint import pprint
 from pathlib import Path
+import logging
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.WARN)
 
 class DocumentRetriever:
     
     def __init__(self, model_name='tfidf_2019-03-18T15-53-19'):
+        # init logger
+        self.logger = logging.getLogger(__name__)
         # load model
         self._load_model(model_name)
         # init search interface
@@ -36,10 +38,10 @@ class DocumentRetriever:
             docs_splitted.append(d)
 
         # show
-        print("Text:", text)
-        print('Query:', q)
-        print([d['title'] for d in docs])
-        print('')
+        # print("Text:", text)
+        # print('Query:', q)
+        # print([d['title'] for d in docs])
+        # print('')
 
         # save results
         results = []
@@ -71,6 +73,7 @@ class DocumentRetriever:
         return [str(sent) for sent in TextBlob(text).sentences]
         
     def _load_model(self, model_name):
+        self.logger.warn('Loading DocumentRetriever models...')
         model_dir = Path('./model')
         self.dct = Dictionary.load(str(model_dir / f'{model_name}.dict'))
         self.tfidf = TfidfModel.load(str(model_dir / f'{model_name}.tfidf'))
