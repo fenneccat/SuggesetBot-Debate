@@ -9,7 +9,7 @@
 ## SentenceSelector
 
 * Should be implemented inside `helper.sentence_selector`
-* Input/Output: `(claim, [sent1, sent2, ...])` -> `[(relevant_sent_a, score), (relevant_sent_b, score), ...]`
+* Input/Output: `(claim, [sent1, sent2, ...])` -> `(claim, [(relevant_sent_a, score), (relevant_sent_b, score), ...])`
   * Output should be sorted by the score in reverse order
 
 ## StanceClassifier
