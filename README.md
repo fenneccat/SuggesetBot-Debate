@@ -29,7 +29,7 @@
 * Input/Output: `(claim, [sent1, sent2, ...])` -> `(claim, [(relevant_sent_a, score), (relevant_sent_b, score), ...])`
   * Output should be sorted by the score in reverse order
 
-## StanceClassifier
+## StanceClassifier (TODO)
 
 * Should be implemented inside `helper.stance_classifier`
 * Input/Output: `(claim, [sent1, sent2, ...])` -> `[(sent1, 'SUPPROT'), (sent2, 'SUPPROT'), (sent3, 'REFUTE'), ...]`
