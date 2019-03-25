@@ -24,7 +24,7 @@
 * How to use SentenceSelector
    * Generate SentenceSelector instance
       * selector = SentenceSelector()
-   * call `get_evidence` method with claim and sentence candidates
+   * call `get_evidences` method with claim and sentence candidates
       * claim, ranked_evidnce = selector.get_evidence(claim, sentence_candidates)
    * `ranked_evidence` is sorted based on confidence score in reverse order
 * Input/Output: `(claim, [sent1, sent2, ...])` -> `(claim, [(relevant_sent_a, score), (relevant_sent_b, score), ...])`
