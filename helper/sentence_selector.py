@@ -132,7 +132,7 @@ class SentenceSelector:
         self.logger.warn('Loading SentenceSelector models...')
         
         # Load a trained model that you have fine-tuned
-        model_dir = './tmp/FEVER_output/'
+        model_dir = './model'
         #model_dir = Path('./model')
         
         output_model_file = model_dir+weight_path ## put pretrained weight from training
