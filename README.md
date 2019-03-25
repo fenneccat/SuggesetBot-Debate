@@ -2,6 +2,10 @@
 
 ## Setup
 
+### Install Dependencies
+
+* `pip install -r requirements.txt`
+
 ### Install Search Engine (Elasticsearch) & Insert Evidence Documents
 
 * Install Elasticsearch package at https://www.elastic.co/
@@ -10,7 +14,6 @@
 
 ### Install Models
 
-* `pip install -r requirements.txt`
 * `python -m spacy download en_core_web_md`
 * `python -m textblob.download_corpora`
 
