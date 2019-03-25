@@ -11,7 +11,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 class DocumentRetriever:
     
-    def __init__(self, hosts=['server.kyoungrok.kr'], port=9200, index='news-please', fields=['title', 'text', 'description']):
+    def __init__(self, hosts='localhost', port=9200, index='kixx', fields=['title', 'text']):
         # init logger
         self.logger = logging.getLogger(__name__)
         # load model
@@ -42,22 +42,19 @@ class DocumentRetriever:
         # print([d['title'] for d in docs])
         # print('')
 
-        # save results
-        results = []
-        results.append({
-            'text': text,
-            'query': ' '.join(q),
+        # return results
+        return {
+            'query': text,
+            'keywords': ' '.join(q),
             'docs': docs_splitted
-        })
-
-        return results
+        }
            
     def _init_search(self, hosts, port, index, fields):
         self.es = Elasticsearch(hosts=hosts, port=port)
         self.index = index
         self.fields = fields
 
-    def _build_query(self, query, fields, limit=10):
+    def _build_query(self, query, fields, limit=3):
         return {
             "query": {
                 "multi_match": {

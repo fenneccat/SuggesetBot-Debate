@@ -25,6 +25,7 @@ from pytorch_pretrained_bert.file_utils import PYTORCH_PRETRAINED_BERT_CACHE
 
 import re
 from unidecode import unidecode
+from pathlib import Path
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.WARN)
 
@@ -132,10 +133,10 @@ class SentenceSelector:
         self.logger.warn('Loading SentenceSelector models...')
         
         # Load a trained model that you have fine-tuned
-        model_dir = './../model'
+        model_dir = Path('./model')
         #model_dir = Path('./model')
         
-        output_model_file = model_dir+weight_path ## put pretrained weight from training
+        output_model_file = str(model_dir / weight_path) ## put pretrained weight from training
         num_labels = 2
 
         model_state_dict = torch.load(output_model_file)
