@@ -8,14 +8,13 @@
 
 ## SentenceSelector
 
-* Should be implemented inside `helper.sentence_selector`
 * Requirement for BERT is needed: https://github.com/huggingface/pytorch-pretrained-BERT
 * How to use SentenceSelector
    * Generate SentenceSelector instance
-      * tmp = SentenceSelector()
-   * call get_evidence method with claim and sentence candidates
-      * claim, ranked_evidnce = tmp.get_evidence(claim, sentence_candidates)
-   * ranked_evidence is sorted based on confidence score reverse order
+      * selector = SentenceSelector()
+   * call `get_evidence` method with claim and sentence candidates
+      * claim, ranked_evidnce = selector.get_evidence(claim, sentence_candidates)
+   * `ranked_evidence` is sorted based on confidence score in reverse order
 * Input/Output: `(claim, [sent1, sent2, ...])` -> `(claim, [(relevant_sent_a, score), (relevant_sent_b, score), ...])`
   * Output should be sorted by the score in reverse order
 
