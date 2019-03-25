@@ -1,1 +1,2 @@
 from .document_retreiver import DocumentRetriever
+from .sentence_selector import SentenceSelector

@@ -2,3 +2,5 @@ gensim
 spacy
 elasticsearch
 textblob
+pytorch-pretrained-bert
+unidecode
