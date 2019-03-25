@@ -2,6 +2,14 @@
 
 ## Setup
 
+### Install Search Engine (Elasticsearch) & Insert Evidence Documents
+
+* Install Elasticsearch package at https://www.elastic.co/
+  * Use default settings (`host=localhost, port=9200`)
+* `python notebook/2_Insert_KIXX_to_Elastic.py` to insert documents
+
+### Install Models
+
 * `pip install -r requirements.txt`
 * `python -m spacy download en_core_web_md`
 * `python -m textblob.download_corpora`
