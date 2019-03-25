@@ -11,23 +11,22 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 class DocumentRetriever:
     
-    def __init__(self, model_name='tfidf_2019-03-18T15-53-19'):
+    def __init__(self, hosts=['server.kyoungrok.kr'], port=9200, index='news-please', fields=['title', 'text', 'description']):
         # init logger
         self.logger = logging.getLogger(__name__)
         # load model
+        model_name='tfidf_2019-03-18T15-53-19'
         self._load_model(model_name)
         # init search interface
-        self._init_search()
+        self._init_search(hosts, port, index, fields)
         
     def search(self, text):
-        INDEX = 'news-please'
         root_topic_tokens = ['Syria', 'refugee']
-        dct, tfidf = self.dct, self.tfidf
         
         # build query
         q = self._extract_important_words(text) + root_topic_tokens
-        Q = self._build_query(' '.join(q))
-        res = self.es.search(index=INDEX, body=Q)
+        Q = self._build_query(' '.join(q), fields=self.fields)
+        res = self.es.search(index=self.index, body=Q)
         docs = [hit["_source"] for hit in res['hits']['hits']]
 
         # split document into sentences
@@ -53,10 +52,12 @@ class DocumentRetriever:
 
         return results
            
-    def _init_search(self, hosts=['server.kyoungrok.kr'], port=19200):
+    def _init_search(self, hosts, port, index, fields):
         self.es = Elasticsearch(hosts=hosts, port=port)
+        self.index = index
+        self.fields = fields
 
-    def _build_query(self, query, fields=['title', 'text', 'description'], limit=10):
+    def _build_query(self, query, fields, limit=10):
         return {
             "query": {
                 "multi_match": {
