@@ -19,7 +19,7 @@
 
 ## SentenceSelector
 
-* Requirement for BERT is needed: https://github.com/huggingface/pytorch-pretrained-BERT
+* Depends on https://github.com/huggingface/pytorch-pretrained-BERT
 * How to use SentenceSelector
    * Generate SentenceSelector instance
       * selector = SentenceSelector()
