@@ -3,7 +3,6 @@
 
 from helper import DocumentRetriever
 from pprint import pprint
-from pprint import pprint
 
 if __name__ == '__main__':
     doc_retriever = DocumentRetriever()
