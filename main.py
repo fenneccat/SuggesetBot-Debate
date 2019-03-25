@@ -3,10 +3,9 @@
 
 from helper import DocumentRetriever
 from pprint import pprint
-from pprint import pprint
 
 if __name__ == '__main__':
-    doc_retriever = DocumentRetriever()
+    doc_retriever = DocumentRetriever(hosts=['localhost'], port=9200, index='kixx', fields=['title', 'text'])
     with open('./data/queries_full.txt', encoding='utf-8-sig') as fin:
         texts = [line.strip() for line in fin]
         for text in texts:
