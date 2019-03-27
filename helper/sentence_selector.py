@@ -139,10 +139,12 @@ class SentenceSelector:
         output_model_file = str(model_dir / weight_path) ## put pretrained weight from training
         num_labels = 2
 
-        model_state_dict = torch.load(output_model_file)
-        model = BertForSequenceClassification.from_pretrained('bert-base-uncased', state_dict=model_state_dict, num_labels=num_labels)
-
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        if torch.cuda.is_available():
+            model_state_dict = torch.load(output_model_file)
+        else:
+            model_state_dict = torch.load(output_model_file, map_location='cpu')
+        model = BertForSequenceClassification.from_pretrained('bert-base-uncased', state_dict=model_state_dict, num_labels=num_labels)
         
         model.to(device)
         
@@ -151,7 +153,7 @@ class SentenceSelector:
         return model, tokenizer, device
     
     
-    def get_evidences(self, claim, candidates):
+    def get_evidences(self, claim, candidates, k=5):
         
         self.logger.warn('Finding Sentences...')
         processor = SuggestBotProcessor()
@@ -204,7 +206,7 @@ class SentenceSelector:
 
         ranked_evidence = [(x,y) for y,x in sorted(zip(positive_confidence, candidates), key = lambda x: x[0], reverse = True)]
 
-        return (claim, ranked_evidence)
+        return (claim, ranked_evidence[:k])
 
 
 class InputFeatures(object):
