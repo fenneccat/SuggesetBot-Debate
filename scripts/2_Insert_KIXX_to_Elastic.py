@@ -58,14 +58,14 @@ def get_action(title, text, index):
 
 
 print('Inserting evidence documents...')
-files = Path('../data/kixx').glob('*_sp.txt')
+files = Path('./data/kixx').glob('*_sp.txt')
 actions = []
 for f in files:
     with f.open(encoding='utf-8-sig') as fin:
         title, text = fin.name.split('\\')[-1], fin.read()
         action = get_action(title, text, INDEX)
         actions.append(action)
-        
+
 res = bulk(es, actions)
 print(f'Inserted {res[0]} documents.')
 
