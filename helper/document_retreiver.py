@@ -20,12 +20,12 @@ class DocumentRetriever:
         # init search interface
         self._init_search(hosts, port, index, fields)
         
-    def search(self, text):
+    def search(self, text, k=5):
         root_topic_tokens = ['Syria', 'refugee']
         
         # build query
         q = self._extract_important_words(text) + root_topic_tokens
-        Q = self._build_query(' '.join(q), fields=self.fields)
+        Q = self._build_query(' '.join(q), fields=self.fields, limit=k)
         res = self.es.search(index=self.index, body=Q)
         docs = [hit["_source"] for hit in res['hits']['hits']]
 
@@ -54,7 +54,7 @@ class DocumentRetriever:
         self.index = index
         self.fields = fields
 
-    def _build_query(self, query, fields, limit=3):
+    def _build_query(self, query, fields, limit):
         return {
             "query": {
                 "multi_match": {
