@@ -9,6 +9,7 @@
 ### Install Dependencies
 
 * `pip install -r requirements.txt`
+* Install pytorch >= 1.0 from https://pytorch.org/get-started/locally/
 
 ### Install Search Engine (Elasticsearch) & Insert Evidence Documents
 
