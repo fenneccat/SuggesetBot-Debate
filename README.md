@@ -2,7 +2,7 @@
 
 ## Before Cloning This Repo
 
-* Please install Git Large File Storage (LFS) [here](https://git-lfs.github.com/) before cloning this repository. It's required to download the models. If not, you will have only empty models, which will cause erros.
+* Please install Git Large File Storage (LFS) [here](https://git-lfs.github.com/) first before cloning this repository. It's required to download the models. If not, you will have only empty models, which will cause erros.
 
 ## Setup
 
