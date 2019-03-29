@@ -1,5 +1,9 @@
 # suggestbot-demo
 
+## Before Cloning This Repo
+
+* Please install Git Large File Storage (LFS) [here](https://git-lfs.github.com/). It's required to download the models.
+
 ## Setup
 
 ### Install Dependencies
