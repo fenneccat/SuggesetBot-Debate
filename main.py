@@ -2,7 +2,8 @@
 # coding: utf-8
 
 from helper import DocumentRetriever
-from helper import SentenceSelector
+from helper import SentenceSelectorPytorch as SentenceSelector
+# from helper import SentenceSelector
 from pprint import pprint
 
 

@@ -1,2 +1,3 @@
 from .document_retreiver import DocumentRetriever
 from .sentence_selector import SentenceSelector
+from .sentence_selector_pytorch import SentenceSelector as SentenceSelectorPytorch
