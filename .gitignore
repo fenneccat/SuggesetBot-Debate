@@ -1,5 +1,6 @@
 # My
 output/
+*.tf_record
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
