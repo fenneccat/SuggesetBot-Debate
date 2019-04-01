@@ -9,7 +9,6 @@
 ### Install Dependencies
 
 * `pip install -r requirements.txt`
-* Install pytorch >= 1.0 from https://pytorch.org/get-started/locally/
 
 ### Install Search Engine (Elasticsearch) & Insert Evidence Documents
 
@@ -61,11 +60,11 @@ if __name__ == '__main__':
 
 ### SentenceSelector
 
-* Depends on https://github.com/huggingface/pytorch-pretrained-BERT
+* Based on https://github.com/google-research/bert
 * How to use SentenceSelector
    * Generate SentenceSelector instance
       * selector = SentenceSelector()
-   * call `get_evidences` method with claim and sentence candidates
+   * call `get_evidences` method with claim, sentence candidates, and an optional values k which specifies desired number of evidences to retrieve (default is 5).
       * claim, ranked_evidnce = selector.get_evidence(claim, sentence_candidates)
    * `ranked_evidence` is sorted based on confidence score in reverse order
 * Input/Output: `(claim, [sent1, sent2, ...])` -> `(claim, [(relevant_sent_a, score), (relevant_sent_b, score), ...])`
