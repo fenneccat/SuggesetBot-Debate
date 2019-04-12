@@ -64,9 +64,9 @@ if __name__ == '__main__':
 
 * How to use SentenceSelector
    * Generate SentenceSelector instance
-      * selector = SentenceSelector()
+      * `selector = SentenceSelector()`
    * call `get_evidences` method with claim, sentence candidates, and an optional values k which specifies desired number of evidences to retrieve (default is 5).
-      * claim, ranked_evidence = selector.get_evidence(claim, sentence_candidates)
+      * `claim, ranked_evidence = selector.get_evidence(claim, sentence_candidates)`
    * `ranked_evidence` is sorted based on confidence score in reverse order
 * Input/Output: `(claim, [sent1, sent2, ...])` -> `(claim, [(relevant_sent_a, score), (relevant_sent_b, score), ...])`
   * Output should be sorted by the score in reverse order
@@ -75,9 +75,9 @@ if __name__ == '__main__':
 
 * How to use StanceClassifier
    * Generate StanceClassifier instance
-      * StanceClass = StanceClassifier()
+      * `stance_classifier = StanceClassifier()`
    * call `get_evidence_stance` method with claim, sentence candidates.
-      * evidence_stance = StanceClass.get_evidence_stance(claim, sentence_candidates)
+      * `evidence_stance = stance_classifier.get_evidence_stance(claim, sentence_candidates)`
    * `evidence_stance` is sorted based on confidence score in reverse order
 * Input/Output: `(claim, [sent1, sent2, ...])` -> `[(sent1, 'SUPPROTS', score), (sent2, 'SUPPROTS', score), (sent3, 'REFUTES', score), ...]`
   * Output is sorted by stance and confidence score of each stance (leftmost-strongest SUPPORTS, rightmost-strongest REFUTES)
