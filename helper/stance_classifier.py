@@ -150,7 +150,7 @@ class StanceClassifier:
         return model, tokenizer, device
     
     
-    def get_evidence_stance(self, claim, evidences, k=5):
+    def get_evidence_stance(self, claim, evidences):
         
         self.logger.warn('Classifying stances...')
         processor = SuggestBotProcessor()
@@ -202,7 +202,7 @@ class StanceClassifier:
 
         evidence_stances = [(x,'SUPPORTS', y) if y >= 0.5 else (x,'REFUTES', 1-y) for y,x in sorted(zip(supports, evidences), key = lambda x: x[0], reverse = True)]
 
-        return claim, evidence_stances[:k]
+        return claim, evidence_stances
 
 
 class InputFeatures(object):
