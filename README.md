@@ -58,20 +58,26 @@ if __name__ == '__main__':
 
 ## API
 
+* Based on https://github.com/google-research/bert
+
 ### SentenceSelector
 
-* Based on https://github.com/google-research/bert
 * How to use SentenceSelector
    * Generate SentenceSelector instance
       * selector = SentenceSelector()
    * call `get_evidences` method with claim, sentence candidates, and an optional values k which specifies desired number of evidences to retrieve (default is 5).
-      * claim, ranked_evidnce = selector.get_evidence(claim, sentence_candidates)
+      * claim, ranked_evidence = selector.get_evidence(claim, sentence_candidates)
    * `ranked_evidence` is sorted based on confidence score in reverse order
 * Input/Output: `(claim, [sent1, sent2, ...])` -> `(claim, [(relevant_sent_a, score), (relevant_sent_b, score), ...])`
   * Output should be sorted by the score in reverse order
 
-### StanceClassifier (TODO)
+### StanceClassifier
 
-* Should be implemented inside `helper.stance_classifier`
-* Input/Output: `(claim, [sent1, sent2, ...])` -> `[(sent1, 'SUPPROT'), (sent2, 'SUPPROT'), (sent3, 'REFUTE'), ...]`
-  * Output should be sorted by the stance
+* How to use StanceClassifier
+   * Generate StanceClassifier instance
+      * StanceClass = StanceClassifier()
+   * call `get_evidence_stance` method with claim, sentence candidates.
+      * evidence_stance = StanceClass.get_evidence_stance(claim, sentence_candidates)
+   * `evidence_stance` is sorted based on confidence score in reverse order
+* Input/Output: `(claim, [sent1, sent2, ...])` -> `[(sent1, 'SUPPROTS'), (sent2, 'SUPPROTS'), (sent3, 'REFUTES'), ...]`
+  * Output is sorted by stance and confidence score of each stance
