@@ -41,6 +41,7 @@ if __name__ == '__main__':
 
     # 2. Classify stances
     print('2. Stances for the evidences')
-    claim, evidence_stances = stance_classifier.get_evidence_stance(claim, candidates)
+    evidences = [ev for ev, _ in ranked_evidences] # classify only evidences, not candidates
+    claim, evidence_stances = stance_classifier.get_evidence_stance(claim, evidences)
     pprint(evidence_stances)
 
