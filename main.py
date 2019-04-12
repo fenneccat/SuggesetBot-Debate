@@ -36,8 +36,11 @@ if __name__ == '__main__':
 
     # Print evidences with stances
     print('Evidences with stances')
+    # 1. Select evidence sentences
     claim, ranked_evidences = sentence_selector.get_evidences(claim, candidates, k=10)
     # pprint(ranked_evidences)
+
+    # 2. Classify stances for the selected evidences
     evidences = [ev for ev, _ in ranked_evidences] # classify stances for evidences only
     claim, evidence_stances = stance_classifier.get_evidence_stance(claim, evidences)
     pprint(evidence_stances)
