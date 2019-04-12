@@ -34,14 +34,10 @@ if __name__ == '__main__':
     print('Get evidence candidates for the claim: "{}"'.format(claim))
     candidates = get_candidates(claim, k=10)
 
-    # 1. Select sentences
-    print('1. Evidences')
+    # Print evidences with stances
+    print('Evidences with stances')
     claim, ranked_evidences = sentence_selector.get_evidences(claim, candidates, k=10)
-    pprint(ranked_evidences)
-
-    # 2. Classify stances
-    print('2. Stances for the evidences')
-    evidences = [ev for ev, _ in ranked_evidences] # classify only evidences, not candidates
+    # pprint(ranked_evidences)
+    evidences = [ev for ev, _ in ranked_evidences] # classify stances for evidences only
     claim, evidence_stances = stance_classifier.get_evidence_stance(claim, evidences)
     pprint(evidence_stances)
-
