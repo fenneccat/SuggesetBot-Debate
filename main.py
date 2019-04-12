@@ -35,12 +35,12 @@ if __name__ == '__main__':
     candidates = get_candidates(claim, k=10)
 
     # 1. Select sentences
-    claim, ranked_evidences = sentence_selector.get_evidences(claim, candidates, k=10)
     print('1. Evidences')
+    claim, ranked_evidences = sentence_selector.get_evidences(claim, candidates, k=10)
     pprint(ranked_evidences)
 
     # 2. Classify stances
-    claim, evidence_stances = stance_classifier.get_evidence_stance(claim, candidates)
     print('2. Stances for the evidences')
+    claim, evidence_stances = stance_classifier.get_evidence_stance(claim, candidates)
     pprint(evidence_stances)
 
