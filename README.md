@@ -79,5 +79,5 @@ if __name__ == '__main__':
    * call `get_evidence_stance` method with claim, sentence candidates.
       * evidence_stance = StanceClass.get_evidence_stance(claim, sentence_candidates)
    * `evidence_stance` is sorted based on confidence score in reverse order
-* Input/Output: `(claim, [sent1, sent2, ...])` -> `[(sent1, 'SUPPROTS'), (sent2, 'SUPPROTS'), (sent3, 'REFUTES'), ...]`
+* Input/Output: `(claim, [sent1, sent2, ...])` -> `[(sent1, 'SUPPROTS', score), (sent2, 'SUPPROTS', score), (sent3, 'REFUTES', score), ...]`
   * Output is sorted by stance and confidence score of each stance (leftmost-strongest SUPPORTS, rightmost-strongest REFUTES)
