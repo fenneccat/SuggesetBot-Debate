@@ -14,7 +14,7 @@
 
 * Install Elasticsearch package at https://www.elastic.co/
   * Use default settings (`host=localhost, port=9200`)
-* `python scripts/insert_kixx.py` to insert documents
+* `python scripts/insert_kixx.py` and `python scripts/insert_news_please.py` to insert documents
   * Elasticsearch should be running
 
 ### Install Models
