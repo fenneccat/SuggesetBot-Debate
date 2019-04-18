@@ -142,7 +142,7 @@ class StanceClassifier:
         else:
             model_state_dict = torch.load(output_model_file, map_location='cpu')
         model = BertForSequenceClassification.from_pretrained('bert-base-uncased', state_dict=model_state_dict, num_labels=num_labels)
-        
+        model.eval()
         model.to(device)
         
         tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)

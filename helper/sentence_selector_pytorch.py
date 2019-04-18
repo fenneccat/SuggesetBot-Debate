@@ -135,7 +135,6 @@ class SentenceSelector:
         
         output_model_file = str(model_dir / weight_path) ## put pretrained weight from training
         num_labels = 2
-
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         if torch.cuda.is_available():
             model_state_dict = torch.load(output_model_file)
@@ -144,7 +143,7 @@ class SentenceSelector:
         model = BertForSequenceClassification.from_pretrained('bert-base-uncased', state_dict=model_state_dict, num_labels=num_labels)
         
         model.to(device)
-        
+        model.eval()
         tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
 
         return model, tokenizer, device
