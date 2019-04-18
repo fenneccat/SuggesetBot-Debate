@@ -10,7 +10,8 @@ from pprint import pprint
 
 HOST = 'localhost'
 PORT = 9200
-INDEX = 'news-please'
+# INDEX = 'kixx' # 수동 태깅된 문서 사용 (소규모 - 46건)
+INDEX = 'news-please' # 자동 크롤된 문서 사용 (대규모 - 100만건)
 FIELDS = ['title', 'text']
 
 # Initialize modules
@@ -38,7 +39,7 @@ if __name__ == '__main__':
     print('Evidences with stances')
     # 1. Select evidence sentences
     claim, ranked_evidences = sentence_selector.get_evidences(claim, candidates, k=10)
-    # pprint(ranked_evidences)
+    pprint(ranked_evidences)
 
     # 2. Classify stances for the selected evidences
     evidences = [ev for ev, _ in ranked_evidences] # classify stances for evidences only
