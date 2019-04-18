@@ -9,7 +9,7 @@ from pprint import pprint
 
 HOST = 'localhost'
 PORT = 9200
-INDEX = 'kixx'
+INDEX = 'news-please'
 FIELDS = ['title', 'text']
 document_retriever = DocumentRetriever(
     hosts=HOST, port=PORT, index=INDEX, fields=FIELDS)
