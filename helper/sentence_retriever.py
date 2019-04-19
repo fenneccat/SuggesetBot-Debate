@@ -42,8 +42,8 @@ class SentenceRetriever:
         return list(set(sentences[:sent_k])) 
 
     def _get_wmd_score(self, query, sentences):
-        query = query.lower().split()
-        sents_with_sim = [(sent, self.embeddings.wmdistance(query, sent.lower().split())) for sent in sentences]
+        query = [w.lower() for w in TextBlob(query).words]
+        sents_with_sim = [(sent, self.embeddings.wmdistance(query, [w.lower() for w in TextBlob(sent).words])) for sent in sentences]
         return sents_with_sim
            
     def _init_search(self, hosts, port, index, fields):

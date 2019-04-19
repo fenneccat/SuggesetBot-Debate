@@ -39,9 +39,9 @@ if __name__ == '__main__':
     # 9. Most refugees arriving in high-income countries are Muslims; their cultural and religious backgrounds have led to many conflicts in the past.
     # 10. Accepting refugees can be a solution to the problem of aging populations.
 
-    claim = "Taking in refugees will increase criminality within host countries."
+    claim = "Taking in refugees costs a lot of money."
     print('Get evidence candidates for the claim: "{}"'.format(claim))
-    candidates = get_candidates(claim, doc_k=5, sent_k=20)
+    candidates = get_candidates(claim, doc_k=10, sent_k=30)
     pprint(candidates)
 
     # Print evidences with stances
