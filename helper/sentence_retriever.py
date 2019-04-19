@@ -36,9 +36,9 @@ class SentenceRetriever:
         for d in docs:
             sentences_with_score += self._get_wmd_score(q, self._split_sentences(d['text']))
         sentences_with_score = sorted(sentences_with_score, key=lambda item: item[1], reverse=True)
-        return sentences_with_score[:sent_k]
-        # sentences = [sent for sent, _ in sentences_with_score]
-        # return sentences[:sent_k]
+        # return sentences_with_score[:sent_k]
+        sentences = [sent for sent, _ in sentences_with_score]
+        return sentences[:sent_k]
 
     def _get_wmd_score(self, query, sentences):
         query = query.lower().split()

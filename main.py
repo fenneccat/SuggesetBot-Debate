@@ -41,16 +41,16 @@ if __name__ == '__main__':
 
     claim = "Taking in refugees will increase criminality within host countries."
     print('Get evidence candidates for the claim: "{}"'.format(claim))
-    candidates = get_candidates(claim, doc_k=20, sent_k=20)
+    candidates = get_candidates(claim, doc_k=5, sent_k=20)
     pprint(candidates)
 
     # Print evidences with stances
-    # print('Evidences with stances')
-    # # 1. Select evidence sentences
-    # claim, ranked_evidences = sentence_selector.get_evidences(claim, candidates, k=10)
-    # pprint(ranked_evidences)
+    print('Evidences with stances')
+    # 1. Select evidence sentences
+    claim, ranked_evidences = sentence_selector.get_evidences(claim, candidates, k=10)
+    pprint(ranked_evidences)
 
-    # # 2. Classify stances for the selected evidences
-    # evidences = [ev for ev, _ in ranked_evidences] # classify stances for evidences only
-    # claim, evidence_stances = stance_classifier.get_evidence_stance(claim, evidences)
-    # pprint(evidence_stances)
+    # 2. Classify stances for the selected evidences
+    evidences = [ev for ev, _ in ranked_evidences] # classify stances for evidences only
+    claim, evidence_stances = stance_classifier.get_evidence_stance(claim, evidences)
+    pprint(evidence_stances)
