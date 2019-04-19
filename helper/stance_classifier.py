@@ -201,7 +201,7 @@ class StanceClassifier:
 
         # evidence_stances = [(x,'SUPPORTS', y) if y >= 0.5 else (x,'REFUTES', 1-y) for y,x in sorted(zip(supports, evidences), key = lambda x: x[0], reverse = True)]
         evidence_stances = [(x,'SUPPORTS', y) if y >= 0.5 else (x,'REFUTES', 1-y) for y,x in zip(supports, evidences)]
-        sorted(zip(supports, eviden/ces), key = lambda x: x[0], reverse = True)
+        sorted(zip(supports, evidences), key = lambda x: x[0], reverse = True)
 
         return claim, evidence_stances
 

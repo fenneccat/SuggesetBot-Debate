@@ -38,7 +38,8 @@ class SentenceRetriever:
         sentences_with_score = sorted(sentences_with_score, key=lambda item: item[1], reverse=True)
         # return sentences_with_score[:sent_k]
         sentences = [sent for sent, _ in sentences_with_score]
-        return sentences[:sent_k]
+        # remove duplicates
+        return list(set(sentences[:sent_k])) 
 
     def _get_wmd_score(self, query, sentences):
         query = query.lower().split()
@@ -72,7 +73,7 @@ class SentenceRetriever:
         self.dct = Dictionary.load(str(model_dir / f'{model_name}.dict'))
         self.tfidf = TfidfModel.load(str(model_dir / f'{model_name}.tfidf'))
         self.nlp = spacy.load('en_core_web_md')
-        self.embeddings = KeyedVectors.load_word2vec_format(model_dir / 'crawl-300d-2M.bin', binary=True)
+        self.embeddings = KeyedVectors.load(str(model_dir / 'wiki-news-300d-1M-subword'))
         
     def _get_tags(self, spacy_doc):
         return [(tok, tok.pos_) for tok in spacy_doc]
