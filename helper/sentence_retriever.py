@@ -6,10 +6,11 @@ from elasticsearch import Elasticsearch
 import json
 from textblob import TextBlob
 from pathlib import Path
+from gensim.models import KeyedVectors
 import logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.WARN)
 
-class DocumentRetriever:
+class SentenceRetriever:
     
     def __init__(self, hosts='localhost', port=9200, index='kixx', fields=['title', 'text']):
         # init logger
@@ -20,34 +21,29 @@ class DocumentRetriever:
         # init search interface
         self._init_search(hosts, port, index, fields)
         
-    def search(self, text, k=5):
-        root_topic_tokens = ['Syria', 'refugee']
-        
+    def search(self, text, doc_k, sent_k):
         # build query
-        q = self._extract_important_words(text) + root_topic_tokens
-        Q = self._build_query(' '.join(q), fields=self.fields, limit=k)
+        # root_topic_tokens = ['Syria', 'refugee']
+        # q = self._extract_important_words(text) + root_topic_tokens
+        # q = ' '.join(q)
+        q = text + ' ' + 'syria refugee'
+        Q = self._build_query(q, fields=self.fields, limit=doc_k)
         res = self.es.search(index=self.index, body=Q)
         docs = [hit["_source"] for hit in res['hits']['hits']]
 
         # split document into sentences
-        docs_splitted = []
+        sentences_with_score = []
         for d in docs:
-            d = d.copy()
-            d['text'] = self._get_sentences(d['text'])
-            docs_splitted.append(d)
+            sentences_with_score += self._get_wmd_score(q, self._split_sentences(d['text']))
+        sentences_with_score = sorted(sentences_with_score, key=lambda item: item[1], reverse=True)
+        return sentences_with_score[:sent_k]
+        # sentences = [sent for sent, _ in sentences_with_score]
+        # return sentences[:sent_k]
 
-        # show
-        # print("Text:", text)
-        # print('Query:', q)
-        # print([d['title'] for d in docs])
-        # print('')
-
-        # return results
-        return {
-            'query': text,
-            'keywords': ' '.join(q),
-            'docs': docs_splitted
-        }
+    def _get_wmd_score(self, query, sentences):
+        query = query.lower().split()
+        sents_with_sim = [(sent, self.embeddings.wmdistance(query, sent.lower().split())) for sent in sentences]
+        return sents_with_sim
            
     def _init_search(self, hosts, port, index, fields):
         self.es = Elasticsearch(hosts=hosts, port=port)
@@ -67,7 +63,7 @@ class DocumentRetriever:
             "from" : 0, "size" : limit,
         }
 
-    def _get_sentences(self, text):
+    def _split_sentences(self, text):
         return [str(sent) for sent in TextBlob(text).sentences]
         
     def _load_model(self, model_name):
@@ -76,6 +72,7 @@ class DocumentRetriever:
         self.dct = Dictionary.load(str(model_dir / f'{model_name}.dict'))
         self.tfidf = TfidfModel.load(str(model_dir / f'{model_name}.tfidf'))
         self.nlp = spacy.load('en_core_web_md')
+        self.embeddings = KeyedVectors.load_word2vec_format(model_dir / 'crawl-300d-2M.bin', binary=True)
         
     def _get_tags(self, spacy_doc):
         return [(tok, tok.pos_) for tok in spacy_doc]

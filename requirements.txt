@@ -11,3 +11,5 @@ unidecode
 pandas
 pyarrow
 tqdm
+pyemd
+gensim
