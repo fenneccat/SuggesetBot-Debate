@@ -10,7 +10,7 @@ from pprint import pprint
 
 HOST = 'localhost'
 PORT = 9200
-INDEX = 'kixx' # Use hand-annotated documents (small - 46 docs)  ## Kix crowdsourcing document set
+INDEX = 'kixx' # Use hand-annotated documents (small - 46 docs)  ## Kix crowdsourcing document set (recommended)
 # INDEX = 'news-please' # Use crawled documents (big - 10,000,000)  ## large newspaper document set
 FIELDS = ['title', 'text']
 
