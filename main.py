@@ -10,8 +10,8 @@ from pprint import pprint
 
 HOST = 'localhost'
 PORT = 9200
-# INDEX = 'kixx' # Use hand-annotated documents (small - 46 docs)
-INDEX = 'news-please' # Use crawled documents (big - 10,000,000)
+INDEX = 'kixx' # Use hand-annotated documents (small - 46 docs)
+# INDEX = 'news-please' # Use crawled documents (big - 10,000,000)
 FIELDS = ['title', 'text']
 
 # Initialize modules
@@ -44,13 +44,16 @@ if __name__ == '__main__':
     candidates = get_candidates(claim, doc_k=10, sent_k=30)
     pprint(candidates)
 
-    # Print evidences with stances
-    print('Evidences with stances')
+    # candidates = [(sent_1, doc_id, doc_url), (sent_2, doc_id, doc_url), ...]
+    candidates_text_only = [c[0] for c in candidates]
+
     # 1. Select evidence sentences
-    claim, ranked_evidences = sentence_selector.get_evidences(claim, candidates, k=10)
+    print('Evidences with relevancy_score')
+    claim, ranked_evidences = sentence_selector.get_evidences(claim, candidates_text_only, k=10)
     pprint(ranked_evidences)
 
     # 2. Classify stances for the selected evidences
-    evidences = [ev for ev, _ in ranked_evidences] # classify stances for evidences only
-    claim, evidence_stances = stance_classifier.get_evidence_stance(claim, evidences)
+    print('Evidences with stance_score')
+    ranked_evidences_text_only = [ev for ev, _ in ranked_evidences] # classify stances for evidences only
+    claim, evidence_stances = stance_classifier.get_evidence_stance(claim, ranked_evidences_text_only)
     pprint(evidence_stances)

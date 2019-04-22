@@ -10,3 +10,5 @@ pyarrow
 tqdm
 pyemd
 gensim
+tensorflow
+pytorch
