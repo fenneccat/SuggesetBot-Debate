@@ -2,16 +2,16 @@
 # coding: utf-8
 
 from helper import SentenceRetriever
-# from helper import SentenceSelector
-from helper import SentenceSelectorPytorch as SentenceSelector
+from helper import SentenceSelector ## Trained by Kialo dataset (recommended)
+#from helper import SentenceSelectorPytorch as SentenceSelector   ## Trained by FEVER+IBM dataset sentence selector
 from helper import StanceClassifier
 from pprint import pprint
 
 
 HOST = 'localhost'
 PORT = 9200
-INDEX = 'kixx' # Use hand-annotated documents (small - 46 docs)
-# INDEX = 'news-please' # Use crawled documents (big - 10,000,000)
+INDEX = 'kixx' # Use hand-annotated documents (small - 46 docs)  ## Kix crowdsourcing document set
+# INDEX = 'news-please' # Use crawled documents (big - 10,000,000)  ## large newspaper document set
 FIELDS = ['title', 'text']
 
 # Initialize modules
