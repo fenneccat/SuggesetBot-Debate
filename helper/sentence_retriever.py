@@ -38,8 +38,10 @@ class SentenceRetriever:
         sentences_with_score = sorted(sentences_with_score, key=lambda item: item[1], reverse=True)
         # return sentences_with_score[:sent_k]
         sentences = [sent for sent, _ in sentences_with_score]
+        sentences = [sent for sent in sentences if len(sent) > 20]
+        
         # remove duplicates
-        return list(set(sentences[:sent_k])) 
+        return list(set(sentences))[:sent_k]
 
     def _get_wmd_score(self, query, sentences):
         query = [w.lower() for w in TextBlob(query).words]

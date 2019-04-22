@@ -1,0 +1,132 @@
+====================
+claim: If Australia can take 18,000 refugees, if Canada can take 25,000, if France can take 35,000, then the United States, 10 times the size of Canada, can take 100,000 refugees.
+Evidence: 
+Don¡¯t believe me?	REFUTES
+And I think we'll be able to get to 10,000.	REFUTES
+I don't believe in that.	REFUTES
+154 ?	SUPPORTS
+despite having a population one-tenth the size of America¡¯s.	REFUTES
+?	REFUTES
+...	REFUTES
+[371]	SUPPORTS
+2) Most of these people aren¡¯t technically ¡°refugees¡±
+
+This terrible situation often gets referred to as ¡°the refugee crisis,¡± but that¡¯s actually misleading.	REFUTES
+But another part of this is a ¡°won¡¯t¡± question.	REFUTES
+====================
+claim: It takes 18 to 24 months for the average Syrian refugee to get through the security screening process.
+Evidence: 
+9.	SUPPORTS
+6.	SUPPORTS
+5.	SUPPORTS
+4.	SUPPORTS
+8.	SUPPORTS
+7.	REFUTES
+3.	SUPPORTS
+2.	SUPPORTS
+1.	SUPPORTS
+Q.	REFUTES
+====================
+claim: Most the refugees are in the Middle East. And that's where most of the help is going.
+Evidence: 
+A.	SUPPORTS
+¡°We didn¡¯t even realize how special he was,¡± she says.	SUPPORTS
+Q.	REFUTES
+But another part of this is a ¡°won¡¯t¡± question.	REFUTES
+But ¡°we¡¯re all different,¡± she says.	REFUTES
+This isn¡¯t especially surprising.	REFUTES
+Part of this is a ¡°can¡¯t¡± question.	REFUTES
+Don¡¯t believe me?	REFUTES
+Kosminsky: I think you¡¯re right.	SUPPORTS
+====================
+claim: Almost two-thirds of Germans say their country has accepted too many refugees.
+Evidence: 
+In 2015, she welcomed more than a million migrants, saying, ¡°We can do this¡± ?	REFUTES
+2) Most of these people aren¡¯t technically ¡°refugees¡±
+
+This terrible situation often gets referred to as ¡°the refugee crisis,¡± but that¡¯s actually misleading.	REFUTES
+People can¡¯t stay at home, so they¡¯re fleeing abroad.	REFUTES
+Hasn¡¯t the refugee crisis calmed down in the last year?	REFUTES
+What is a refugee?	REFUTES
+The majority of people who have been displaced are what¡¯s called ¡°internally displaced people,¡± or IDPs ?	SUPPORTS
+This isn¡¯t especially surprising.	REFUTES
+?	SUPPORTS
+...	SUPPORTS
+In practice, though, that¡¯s not what happens.	REFUTES
+====================
+claim: Accepting refugees benefit the citizens of high-income countries.
+Evidence: 
+But another part of this is a ¡°won¡¯t¡± question.	REFUTES
+This isn¡¯t especially surprising.	REFUTES
+Don¡¯t believe me?	REFUTES
+Part of this is a ¡°can¡¯t¡± question.	REFUTES
+...	SUPPORTS
+?	SUPPORTS
+Q.	REFUTES
+A.	SUPPORTS
+====================
+claim: Taking in refugees costs a lot of money.
+Evidence: 
+Q.	REFUTES
+Part of this is a ¡°can¡¯t¡± question.	REFUTES
+This isn¡¯t especially surprising.	REFUTES
+that¡¯s certainly there ?	REFUTES
+¡°Rep.	SUPPORTS
+¡°We didn¡¯t even realize how special he was,¡± she says.	SUPPORTS
+A.	SUPPORTS
+Don¡¯t believe me?	REFUTES
+Robertson¡¯s comments aren¡¯t an anomaly.	REFUTES
+====================
+claim: All high-income countries are signatories to the 1951 Refugee Convention.
+Evidence: 
+Don¡¯t believe me?	REFUTES
+¡°This will paralyze us for years,¡± a judge told Der Tagesspiegel, a German daily based in Berlin.	REFUTES
+In 2015, she welcomed more than a million migrants, saying, ¡°We can do this¡± ?	SUPPORTS
+I don't believe in that.	REFUTES
+But another part of this is a ¡°won¡¯t¡± question.	REFUTES
+Part of this is a ¡°can¡¯t¡± question.	REFUTES
+despite having a population one-tenth the size of America¡¯s.	SUPPORTS
+[14], a figure questioned as too low.	REFUTES
+This isn¡¯t especially surprising.	REFUTES
+¡°We have been duped,¡± Strasser said.	REFUTES
+====================
+claim: Taking in refugees will increase criminality within host countries.
+Evidence: 
+But in total, Syrians only make up a third of the world¡¯s 16 million refugees.	REFUTES
+How do we know the refugees aren¡¯t terrorists?	REFUTES
+Can a refugee become a U.S. citizen?	REFUTES
+This isn¡¯t especially surprising.	REFUTES
+But another part of this is a ¡°won¡¯t¡± question.	REFUTES
+Part of this is a ¡°can¡¯t¡± question.	REFUTES
+2) Most of these people aren¡¯t technically ¡°refugees¡±
+
+This terrible situation often gets referred to as ¡°the refugee crisis,¡± but that¡¯s actually misleading.	REFUTES
+In practice, though, that¡¯s not what happens.	REFUTES
+?	SUPPORTS
+...	SUPPORTS
+====================
+claim: Most refugees arriving in high-income countries are Muslims; their cultural and religious backgrounds have led to many conflicts in the past.
+Evidence: 
+¡°This is my body.	SUPPORTS
+2) Most of these people aren¡¯t technically ¡°refugees¡±
+
+This terrible situation often gets referred to as ¡°the refugee crisis,¡± but that¡¯s actually misleading.	REFUTES
+¡°It doesn¡¯t feel like it¡¯s a command or anything of that sort.	REFUTES
+Don¡¯t believe me?	REFUTES
+That really caught us off-guard, we didn¡¯t see that coming.	REFUTES
+People can¡¯t stay at home, so they¡¯re fleeing abroad.	REFUTES
+It¡¯s my choice to show you or not show you,¡± she said.	SUPPORTS
+it¡¯s your choice.	REFUTES
+But another part of this is a ¡°won¡¯t¡± question.	REFUTES
+It didn¡¯t make sense to us.	REFUTES
+====================
+claim: Accepting refugees can be a solution to the problem of aging populations.
+Evidence: 
+Q. I am an Iraqi refugee in Syria.	SUPPORTS
+Don¡¯t believe me?	REFUTES
+Q.	REFUTES
+This isn¡¯t especially surprising.	REFUTES
+Part of this is a ¡°can¡¯t¡± question.	SUPPORTS
+A.	SUPPORTS
+...	SUPPORTS
+?	SUPPORTS
