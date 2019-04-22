@@ -41,17 +41,16 @@ if __name__ == '__main__':
 
     claim = "Taking in refugees costs a lot of money."
     print('Get evidence candidates for the claim: "{}"'.format(claim))
-    candidates = get_candidates(claim, doc_k=10, sent_k=30)
+    candidates = get_candidates(claim, doc_k=5, sent_k=30)
+    # candidates = [(sent_1, sent_1_orig, doc_id, doc_url), (sent_2, sent_2_orig, doc_id, doc_url), ...]
     pprint(candidates)
-
-    # candidates = [(sent_1, doc_id, doc_url), (sent_2, doc_id, doc_url), ...]
 
     # candidates_id_url_map -> {
     #   'sent_1': (doc_id, doc_url),
     #   'sent_2': (doc_id, doc_url),
     #   ...
     # }
-    candidates_id_url_map = {c[0]: (c[1], c[2]) for c in candidates}
+    candidates_id_url_map = {c[0]: (c[2], c[3]) for c in candidates}
     candidates_text_only = list(candidates_id_url_map.keys())
 
     # 1. Select evidence sentences

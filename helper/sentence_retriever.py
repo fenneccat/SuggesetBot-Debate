@@ -53,9 +53,9 @@ class SentenceRetriever:
         result = []
         for sent, score, doc_id, url in sentences_with_score:
             # clean sentence
-            sent = self._clean_sentence(sent)
+            sent_cleaned = self._clean_sentence(sent)
             if (sent not in result) and (len(sent.split()) > MIN_LEN):
-                result.append((sent, doc_id, url))
+                result.append((sent_cleaned, sent, doc_id, url))
                 if len(result) >= sent_k:
                     break
         return result
