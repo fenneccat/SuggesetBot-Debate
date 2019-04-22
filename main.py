@@ -45,7 +45,14 @@ if __name__ == '__main__':
     pprint(candidates)
 
     # candidates = [(sent_1, doc_id, doc_url), (sent_2, doc_id, doc_url), ...]
-    candidates_text_only = [c[0] for c in candidates]
+
+    # candidates_id_url_map -> {
+    #   'sent_1': (doc_id, doc_url),
+    #   'sent_2': (doc_id, doc_url),
+    #   ...
+    # }
+    candidates_id_url_map = {c[0]: (c[1], c[2]) for c in candidates}
+    candidates_text_only = list(candidates_id_url_map.keys())
 
     # 1. Select evidence sentences
     print('Evidences with relevancy_score')
