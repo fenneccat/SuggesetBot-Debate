@@ -67,6 +67,7 @@ def get_url(ev_id):
 
 print('Inserting evidence documents...')
 files = Path('./data/kixx').glob('*_sp.txt')
+print(len(list(files)))
 actions = []
 for f in files:
     with f.open(encoding='utf-8-sig') as fin:

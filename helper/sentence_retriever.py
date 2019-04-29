@@ -62,13 +62,13 @@ class SentenceRetriever:
 
     def _clean_sentence(self, sentence):
         # remove citation & newline
-        sentence = re.sub('(\[\d+\]|\n)', ' ', sentence)
+        sentence = re.sub('(\[\d+\]|\n|\d+\)\s*)', ' ', sentence)
         return sentence
 
     def _get_wmd_score(self, query, sentence):
         query = [w.lower() for w in TextBlob(query).words]
         sent = [w.lower() for w in TextBlob(sentence).words]
-        return (sent, self.embeddings.wmdistance(query, sent))
+        return self.embeddings.wmdistance(query, sent)
            
     def _init_search(self, hosts, port, index, fields):
         self.es = Elasticsearch(hosts=hosts, port=port)
