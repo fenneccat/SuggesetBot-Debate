@@ -48,10 +48,11 @@ def get_action(title, text, ev_id, ev_url, index):
     return {
         '_index': index,
         '_type': 'evidence',
-        '_id': '{}|{}'.format(ev_id, ev_url),
         '_source': {
             'title': title,
-            'text': text
+            'text': text,
+            'doc_id': ev_id,
+            'doc_url': ev_url
         }
     }
 

@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from helper import SentenceRetriever
-from helper import SentenceSelector ## Trained by Kialo dataset (recommended)
-#from helper import SentenceSelectorPytorch as SentenceSelector   ## Trained by FEVER+IBM dataset sentence selector
-from helper import StanceClassifier
+
 from pprint import pprint
+
+from helper.sentence_retriever import SentenceRetriever
+# from helper.sentence_selector import SentenceSelector ## Trained by Kialo dataset (recommended)
+# from helper.sentence_selector_pytorch import SentenceSelector ## Trained by FEVER+IBM dataset sentence selector
+# from helper.stance_classifier import StanceClassifier
 
 
 HOST = 'localhost'
@@ -17,8 +19,8 @@ FIELDS = ['title', 'text']
 # Initialize modules
 sentence_retriever = SentenceRetriever(
     hosts=HOST, port=PORT, index=INDEX, fields=FIELDS)
-sentence_selector = SentenceSelector()
-stance_classifier = StanceClassifier()
+# sentence_selector = SentenceSelector()
+# stance_classifier = StanceClassifier()
 
 def get_candidates(claim, doc_k, sent_k):
     candidates = sentence_retriever.search(claim, doc_k=doc_k, sent_k=sent_k)
@@ -39,9 +41,9 @@ if __name__ == '__main__':
     # 9. Most refugees arriving in high-income countries are Muslims; their cultural and religious backgrounds have led to many conflicts in the past.
     # 10. Accepting refugees can be a solution to the problem of aging populations.
 
-    claim = "One more point. The Boston Bombing Marathon bombers, the Tsarnaev brothers they're not refugees. They were asylum seekers."
+    claim = "One just in December. Now, they weren't refugees. They were the children of refugees. When you admit somebody, you are admitting their posterity."
     print('Get evidence candidates for the claim: "{}"'.format(claim))
-    candidates = get_candidates(claim, doc_k=5, sent_k=30)
+    candidates = get_candidates(claim, doc_k=10, sent_k=30)
     # candidates = [(sent_1, sent_1_orig, doc_id, doc_url), (sent_2, sent_2_orig, doc_id, doc_url), ...]
     pprint(candidates)
 
@@ -50,17 +52,17 @@ if __name__ == '__main__':
     #   'sent_2': (doc_id, doc_url),
     #   ...
     # }
-    # candidates_id_url_map = {c[0]: (c[2], c[3]) for c in candidates}
-    # candidates_text_only = [str(k) for k in candidates_id_url_map.keys()]
-    # pprint(candidates_text_only)
+    candidates_id_url_map = {c[0]: (c[2], c[3]) for c in candidates}
+    candidates_text_only = [str(k) for k in candidates_id_url_map.keys()]
+    pprint(candidates_text_only)
 
     # 1. Select evidence sentences
-    # print('Evidences with relevancy_score')
-    # claim, ranked_evidences = sentence_selector.get_evidences(claim, candidates_text_only, k=10)
-    # pprint(ranked_evidences)
+    print('Evidences with relevancy_score')
+    claim, ranked_evidences = sentence_selector.get_evidences(claim, candidates_text_only, k=10)
+    pprint(ranked_evidences)
 
-    # # 2. Classify stances for the selected evidences
-    # print('Evidences with stance_score')
-    # ranked_evidences_text_only = [ev for ev, _ in ranked_evidences] # classify stances for evidences only
-    # claim, evidence_stances = stance_classifier.get_evidence_stance(claim, ranked_evidences_text_only)
-    # pprint(evidence_stances)
+    # 2. Classify stances for the selected evidences
+    print('Evidences with stance_score')
+    ranked_evidences_text_only = [ev for ev, _ in ranked_evidences] # classify stances for evidences only
+    claim, evidence_stances = stance_classifier.get_evidence_stance(claim, ranked_evidences_text_only)
+    pprint(evidence_stances)
