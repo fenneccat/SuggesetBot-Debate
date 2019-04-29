@@ -2,16 +2,16 @@
 # coding: utf-8
 
 from helper import SentenceRetriever
-# from helper import SentenceSelector
-from helper import SentenceSelectorPytorch as SentenceSelector
+from helper import SentenceSelector ## Trained by Kialo dataset (recommended)
+#from helper import SentenceSelectorPytorch as SentenceSelector   ## Trained by FEVER+IBM dataset sentence selector
 from helper import StanceClassifier
 from pprint import pprint
 
 
 HOST = 'localhost'
 PORT = 9200
-# INDEX = 'kixx' # Use hand-annotated documents (small - 46 docs)
-INDEX = 'news-please' # Use crawled documents (big - 10,000,000)
+INDEX = 'kixx' # Use hand-annotated documents (small - 46 docs)  ## Kix crowdsourcing document set (recommended)
+# INDEX = 'news-please' # Use crawled documents (big - 10,000,000)  ## large newspaper document set
 FIELDS = ['title', 'text']
 
 # Initialize modules
@@ -41,16 +41,25 @@ if __name__ == '__main__':
 
     claim = "Taking in refugees costs a lot of money."
     print('Get evidence candidates for the claim: "{}"'.format(claim))
-    candidates = get_candidates(claim, doc_k=10, sent_k=30)
+    candidates = get_candidates(claim, doc_k=5, sent_k=30)
+    # candidates = [(sent_1, sent_1_orig, doc_id, doc_url), (sent_2, sent_2_orig, doc_id, doc_url), ...]
     pprint(candidates)
 
-    # Print evidences with stances
-    print('Evidences with stances')
+    # candidates_id_url_map -> {
+    #   'sent_1': (doc_id, doc_url),
+    #   'sent_2': (doc_id, doc_url),
+    #   ...
+    # }
+    candidates_id_url_map = {c[0]: (c[2], c[3]) for c in candidates}
+    candidates_text_only = list(candidates_id_url_map.keys())
+
     # 1. Select evidence sentences
-    claim, ranked_evidences = sentence_selector.get_evidences(claim, candidates, k=10)
+    print('Evidences with relevancy_score')
+    claim, ranked_evidences = sentence_selector.get_evidences(claim, candidates_text_only, k=10)
     pprint(ranked_evidences)
 
     # 2. Classify stances for the selected evidences
-    evidences = [ev for ev, _ in ranked_evidences] # classify stances for evidences only
-    claim, evidence_stances = stance_classifier.get_evidence_stance(claim, evidences)
+    print('Evidences with stance_score')
+    ranked_evidences_text_only = [ev for ev, _ in ranked_evidences] # classify stances for evidences only
+    claim, evidence_stances = stance_classifier.get_evidence_stance(claim, ranked_evidences_text_only)
     pprint(evidence_stances)

@@ -8,6 +8,7 @@ from textblob import TextBlob
 from pathlib import Path
 from gensim.models import KeyedVectors
 import logging
+import re
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.WARN)
 
 class SentenceRetriever:
@@ -34,30 +35,40 @@ class SentenceRetriever:
         # split document into sentences
         sentences_with_score = []
         for d in docs:
-            sentences_with_score += self._get_wmd_score(q, self._split_sentences(d['text']))
+            doc_id, url = d['doc_id'], d['doc_url']
+            sentences = self._split_sentences(d['text'])
+            for sent in sentences:
+                score = self._get_wmd_score(q, sent)
+                sentences_with_score.append((sent, score, doc_id, url))
         sentences_with_score = sorted(sentences_with_score, key=lambda item: item[1], reverse=True)
         result = self._prepare_result(sentences_with_score, sent_k)
         return result
 
     def _prepare_result(self, sentences_with_score, sent_k):
-        sentences = [sent for sent, _ in sentences_with_score]
-        # filter
+        # sentences = [sent for sent, _ in sentences_with_score]
         # 1. remove duplicates
         # 2. length > 5 words
         # 3. return only sent_k
         MIN_LEN = 5
         result = []
-        for sent in sentences:
+        for sent, score, doc_id, url in sentences_with_score:
+            # clean sentence
+            sent_cleaned = self._clean_sentence(sent)
             if (sent not in result) and (len(sent.split()) > MIN_LEN):
-                result.append(sent)
+                result.append((sent_cleaned, sent, doc_id, url))
                 if len(result) >= sent_k:
                     break
         return result
 
-    def _get_wmd_score(self, query, sentences):
+    def _clean_sentence(self, sentence):
+        # remove citation & newline
+        sentence = re.sub('(\[\d+\]|\n)', ' ', sentence)
+        return sentence
+
+    def _get_wmd_score(self, query, sentence):
         query = [w.lower() for w in TextBlob(query).words]
-        sents_with_sim = [(sent, self.embeddings.wmdistance(query, [w.lower() for w in TextBlob(sent).words])) for sent in sentences]
-        return sents_with_sim
+        sent = [w.lower() for w in TextBlob(sentence).words]
+        return (sent, self.embeddings.wmdistance(query, sent))
            
     def _init_search(self, hosts, port, index, fields):
         self.es = Elasticsearch(hosts=hosts, port=port)

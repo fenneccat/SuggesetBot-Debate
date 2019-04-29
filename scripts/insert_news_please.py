@@ -45,13 +45,15 @@ reset_index(INDEX)
 # In[34]:
 
 
-def get_action(title, text, index):
+def get_action(title, text, url, index):
     return {
         '_index': index,
         '_type': 'evidence',
         '_source': {
             'title': title,
-            'text': text
+            'text': text,
+            'doc_id': url,
+            'doc_url': url
         }
     }
 
@@ -65,7 +67,8 @@ df = pd.read_parquet(fpath)
 actions = []
 for i, row in tqdm(df.iterrows(), total=df.shape[0]):
     title, text = row['title'] + (row['description'] or ''), row['text']
-    action = get_action(title, text, INDEX)
+    url = row['url']
+    action = get_action(title, text, url, INDEX)
     actions.append(action)
 res = bulk(es, actions)
 print(f'Inserted {res[0]} documents.')

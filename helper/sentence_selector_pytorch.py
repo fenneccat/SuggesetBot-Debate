@@ -151,7 +151,7 @@ class SentenceSelector:
     
     def get_evidences(self, claim, candidates, k=5):
         
-        self.logger.warn('Finding Sentences...')
+        self.logger.warn('Selecting Sentences...')
         processor = SuggestBotProcessor()
         label_list = processor.get_labels()
         max_seq_length = 128
