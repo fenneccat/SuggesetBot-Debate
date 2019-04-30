@@ -23,7 +23,7 @@ sentence_retriever = SentenceRetriever(
 sentence_selector = SentenceSelector()
 stance_classifier = StanceClassifier()
 
-def clean_sentence(self, sentence):
+def clean_sentence(sentence):
     # remove citation & newline
     sentence = re.sub('(\[\d+\]|\n|\d+\)\s*)', ' ', sentence)
     return sentence
@@ -60,7 +60,6 @@ if __name__ == '__main__':
     candidates_id_url_map = {c[0]: (c[1], c[2]) for c in candidates}
     candidates_text_only = [str(k) for k in candidates_id_url_map.keys()]
     pprint(candidates_text_only)
-    # print(clean_sentence(candidates_text_only[0])) # use clean_sentence() to remove noisy text (e.g. [2]) from a sentence
 
     # 1. Select evidence sentences
     print('Evidences with relevancy_score')
@@ -72,3 +71,6 @@ if __name__ == '__main__':
     ranked_evidences_text_only = [ev for ev, _ in ranked_evidences] # classify stances for evidences only
     claim, evidence_stances = stance_classifier.get_evidence_stance(claim, ranked_evidences_text_only)
     pprint(evidence_stances)
+    
+    final_sentence = [(clean_sentence(ev), stance, stance_conf) for ev, stance, stance_conf in evidence_stances]
+    pprint(final_sentence)
