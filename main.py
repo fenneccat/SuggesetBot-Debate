@@ -3,6 +3,7 @@
 
 
 from pprint import pprint
+import re
 
 from helper.sentence_retriever import SentenceRetriever
 # from helper.sentence_selector import SentenceSelector ## Trained by Kialo dataset (recommended)
@@ -22,10 +23,14 @@ sentence_retriever = SentenceRetriever(
 # sentence_selector = SentenceSelector()
 # stance_classifier = StanceClassifier()
 
+def clean_sentence(self, sentence):
+    # remove citation & newline
+    sentence = re.sub('(\[\d+\]|\n|\d+\)\s*)', ' ', sentence)
+    return sentence
+
 def get_candidates(claim, doc_k, sent_k):
     candidates = sentence_retriever.search(claim, doc_k=doc_k, sent_k=sent_k)
     return candidates
-
 
 if __name__ == '__main__':
 
@@ -44,7 +49,7 @@ if __name__ == '__main__':
     claim = "One just in December. Now, they weren't refugees. They were the children of refugees. When you admit somebody, you are admitting their posterity."
     print('Get evidence candidates for the claim: "{}"'.format(claim))
     candidates = get_candidates(claim, doc_k=10, sent_k=30)
-    # candidates = [(sent_1, sent_1_orig, doc_id, doc_url), (sent_2, sent_2_orig, doc_id, doc_url), ...]
+    # candidates = [(sent_1, doc_id, doc_url), (sent_2, doc_id, doc_url), ...]
     pprint(candidates)
 
     # candidates_id_url_map -> {
@@ -52,9 +57,10 @@ if __name__ == '__main__':
     #   'sent_2': (doc_id, doc_url),
     #   ...
     # }
-    candidates_id_url_map = {c[1]: (c[2], c[3]) for c in candidates}
+    candidates_id_url_map = {c[0]: (c[1], c[2]) for c in candidates}
     candidates_text_only = [str(k) for k in candidates_id_url_map.keys()]
     pprint(candidates_text_only)
+    # print(clean_sentence(candidates_text_only[0])) # use clean_sentence() to remove noisy text (e.g. [2]) from a sentence
 
     # 1. Select evidence sentences
     print('Evidences with relevancy_score')

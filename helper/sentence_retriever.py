@@ -56,9 +56,8 @@ class SentenceRetriever:
         result = []
         for sent, score, doc_id, url in sentences_with_score:
             # clean sentence
-            sent_cleaned = self._clean_sentence(sent)
             if (sent not in result) and (len(sent.split()) > MIN_LEN):
-                result.append((sent_cleaned, sent, doc_id, url))
+                result.append((sent, doc_id, url))
                 if len(result) >= sent_k:
                     break
         return result
@@ -69,11 +68,6 @@ class SentenceRetriever:
         #         return df_url.loc[ev_id].evidence_url
         #     except:
         #         return ''
-
-    def _clean_sentence(self, sentence):
-        # remove citation & newline
-        sentence = re.sub('(\[\d+\]|\n|\d+\)\s*)', ' ', sentence)
-        return sentence
 
     def _get_wmd_score(self, query, sentence):
         query = [w.lower() for w in TextBlob(query).words]
