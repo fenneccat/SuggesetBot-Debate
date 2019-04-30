@@ -6,9 +6,9 @@ from pprint import pprint
 import re
 
 from helper.sentence_retriever import SentenceRetriever
-# from helper.sentence_selector import SentenceSelector ## Trained by Kialo dataset (recommended)
+from helper.sentence_selector import SentenceSelector ## Trained by Kialo dataset (recommended)
 # from helper.sentence_selector_pytorch import SentenceSelector ## Trained by FEVER+IBM dataset sentence selector
-# from helper.stance_classifier import StanceClassifier
+from helper.stance_classifier import StanceClassifier
 
 
 HOST = 'localhost'
@@ -20,8 +20,8 @@ FIELDS = ['title', 'text']
 # Initialize modules
 sentence_retriever = SentenceRetriever(
     hosts=HOST, port=PORT, index=INDEX, fields=FIELDS)
-# sentence_selector = SentenceSelector()
-# stance_classifier = StanceClassifier()
+sentence_selector = SentenceSelector()
+stance_classifier = StanceClassifier()
 
 def clean_sentence(self, sentence):
     # remove citation & newline
