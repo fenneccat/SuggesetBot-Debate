@@ -30,13 +30,16 @@ class SentenceRetriever:
         q = text + ' ' + 'syria refugee'
         Q = self._build_query(q, fields=self.fields, limit=doc_k)
         res = self.es.search(index=self.index, body=Q)
-        docs = [hit["_source"] for hit in res['hits']['hits']]
+        # docs = [hit["_source"] for hit in res['hits']['hits']]
+        docs = [hit for hit in res['hits']['hits']]
 
         # split document into sentences
         sentences_with_score = []
         for d in docs:
-            doc_id, url = d['doc_id'], d['doc_url']
-            sentences = self._split_sentences(d['text'])
+            # doc_id, url = d['_doc_id'], d['_doc_url']
+            doc_id, url = d['_id'].split('|')
+            # doc_id, url = '', ''
+            sentences = self._split_sentences(d['_source']['text'])
             for sent in sentences:
                 score = self._get_wmd_score(q, sent)
                 sentences_with_score.append((sent, score, doc_id, url))
@@ -60,15 +63,22 @@ class SentenceRetriever:
                     break
         return result
 
+        # df_url = pd.read_csv('./data/kixx-url.tsv', sep='\t').set_index('evidence_id')
+        # def get_url(ev_id):
+        #     try:
+        #         return df_url.loc[ev_id].evidence_url
+        #     except:
+        #         return ''
+
     def _clean_sentence(self, sentence):
         # remove citation & newline
-        sentence = re.sub('(\[\d+\]|\n)', ' ', sentence)
+        sentence = re.sub('(\[\d+\]|\n|\d+\)\s*)', ' ', sentence)
         return sentence
 
     def _get_wmd_score(self, query, sentence):
         query = [w.lower() for w in TextBlob(query).words]
         sent = [w.lower() for w in TextBlob(sentence).words]
-        return (sent, self.embeddings.wmdistance(query, sent))
+        return self.embeddings.wmdistance(query, sent)
            
     def _init_search(self, hosts, port, index, fields):
         self.es = Elasticsearch(hosts=hosts, port=port)
