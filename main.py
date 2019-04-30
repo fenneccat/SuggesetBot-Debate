@@ -52,7 +52,7 @@ if __name__ == '__main__':
     #   'sent_2': (doc_id, doc_url),
     #   ...
     # }
-    candidates_id_url_map = {c[0]: (c[2], c[3]) for c in candidates}
+    candidates_id_url_map = {c[1]: (c[2], c[3]) for c in candidates}
     candidates_text_only = [str(k) for k in candidates_id_url_map.keys()]
     pprint(candidates_text_only)
 
